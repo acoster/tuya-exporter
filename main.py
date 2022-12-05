@@ -39,9 +39,12 @@ if __name__ == '__main__':
     tuya_api_secret = os.environ['TUYA_API_SECRET']
     tuya_device_id = os.environ['TUYA_DEVICE_ID']
 
+    listening_port = int(os.getenv('TUYA_EXPORTER_PORT', 7979))
+    refresh_period = int(os.getenv('TUYA_EXPORTER_REFRESH_PERIOD', 30))
+
     client = tinytuya.Cloud(tuya_region, tuya_api_key, tuya_api_secret, tuya_device_id)
     u = Updater(client)
-    schedule.every(30).seconds.do(lambda: u.update())
-    start_http_server(7979)
+    schedule.every(refresh_period).seconds.do(lambda: u.update())
+    start_http_server(listening_port)
     while True:
         schedule.run_pending()
