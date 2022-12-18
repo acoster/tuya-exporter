@@ -18,7 +18,7 @@ class Updater(object):
     def update(self):
         for device_name, device in self.__devices.items():
             status = self.__client.getstatus(device['id'])
-            if 'success' not in status or not status['success']:
+            if status is None or 'success' not in status or not status['success']:
                 return
 
             for entry in status['result']:
