@@ -93,7 +93,7 @@ def collect(collector: Collector):
 
 if __name__ == '__main__':
     listening_port = int(os.getenv('TUYA_EXPORTER_PORT', 7979))
-    refresh_period = int(os.getenv('TUYA_EXPORTER_REFRESH_PERIOD', 5))
+    refresh_period = int(os.getenv('TUYA_EXPORTER_REFRESH_PERIOD', 30))
 
     if os.path.isfile('tinytuya.json'):
         client = tinytuya.Cloud()
@@ -106,6 +106,7 @@ if __name__ == '__main__':
         client = tinytuya.Cloud(tuya_region, tuya_api_key, tuya_api_secret, tuya_device_id)
 
     u = Collector(client)
+    u.collect()
     schedule.every(refresh_period).seconds.do(collect, collector=u)
     start_http_server(listening_port)
     while True:
