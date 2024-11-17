@@ -11,7 +11,7 @@ from prometheus_client import Gauge, start_http_server
 
 CURRENT_TEMPERATURE = Gauge('tuya_sensor_temperature', 'Current temperature', ['device'], unit='celsius')
 CURRENT_HUMIDITY = Gauge('tuya_sensor_relative_humidity', 'Relative humidity', ['device'], unit='percent')
-UPDATE_AGE_S = Gauge('tuya_update_age_s', 'Update age for each sensor', ['device'], unit='seconds')
+UPDATE_AGE = Gauge('tuya_update_age', 'Update age for each sensor', ['device'], unit='seconds')
 
 
 class Collector(object):
@@ -32,7 +32,7 @@ class Collector(object):
             update_age = time_now - device['update_time']
             if update_age > 10_800:
                 continue
-            UPDATE_AGE_S.labels(device['name']).set(int(update_age))
+            UPDATE_AGE.labels(device['name']).set(int(update_age))
 
             for entry in device['status']:
                 factor = self.get_scale_factor(device['id'], entry['code'])
