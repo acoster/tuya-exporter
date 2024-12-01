@@ -3,6 +3,8 @@ FROM python:3.11
 # Keeps Python from generating .pyc files in the container
 ENV PYTHONDONTWRITEBYTECODE=1
 
+EXPOSE 7979
+
 # Install & use pipenv
 COPY Pipfile Pipfile.lock ./
 RUN python -m pip install --upgrade pip
