@@ -31,6 +31,7 @@ class Collector(object):
     def collect(self):
         """Retrieves sensor statuses from Tuya cloud, and update the respective Prometheus metrics."""
         logger.debug("Collecting sensor data")
+        self.__clear_gauges()
 
         result = self.__client.getdevices(verbose=True)
         if result is None or 'success' not in result or not result['success']:
