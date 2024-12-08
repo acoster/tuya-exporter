@@ -1,16 +1,14 @@
-import sys
-import typing
-import logging
-import time
-import os.path
 import functools
-
-import tinytuya
-import schedule
 import json
-
+import logging
+import os.path
+import sys
+import time
+import typing
 from collections import defaultdict
-# noinspection PyPackageRequirements
+
+import schedule
+import tinytuya
 from prometheus_client import Gauge, Enum, start_http_server
 
 logger = logging.getLogger()
