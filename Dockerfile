@@ -5,10 +5,9 @@ ENV PYTHONDONTWRITEBYTECODE=1
 
 EXPOSE 7979
 
-# Install & use pipenv
-COPY Pipfile Pipfile.lock ./
+COPY requirements.txt ./
 RUN python -m pip install --upgrade pip
-RUN pip install pipenv && pipenv install --dev --system --deploy
+RUN pip install -r requirements.txt
 
 WORKDIR /app
 COPY . /app
