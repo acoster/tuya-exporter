@@ -1,4 +1,4 @@
 -i https://pypi.org/simple
 schedule>=1.2.2
-tinytuya>=1.15.1
-prometheus_client>=0.21.1
+tinytuya>=1.17.4
+prometheus_client>=0.22.1
